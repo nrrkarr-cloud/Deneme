@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyaz Tavşan'ın Çay Saati Sayacı</title>
-    <!-- Tasarım için Tailwind CSS -->
+    <title>Menesse'nin Harikalar Diyarı - Çizim Görevi</title>
+    <!-- Tailwind CSS ile sihirli tasarım -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Quicksand:wght@500;700&display=swap');
@@ -15,95 +15,127 @@
 <body class="bg-slate-950 text-white min-h-screen flex items-center justify-center p-4 body-font">
 
     <!-- Sihirli Çerçeve Kutusu -->
-    <div class="max-w-md w-full bg-slate-900/80 border-2 border-amber-500/50 rounded-3xl p-6 shadow-2xl backdrop-blur-md text-center relative overflow-hidden">
+    <div class="max-w-md w-full bg-slate-900/90 border-2 border-amber-500/60 rounded-3xl p-6 shadow-2xl backdrop-blur-md text-center relative overflow-hidden">
         
-        <!-- Tavşan Kulakları / Dekoratif Üst İkon -->
+        <!-- Üst Dekoratif İkon -->
         <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 text-4xl">
-            🐇⏳
+            🐇🎨
         </div>
 
-        <!-- Başlık -->
+        <!-- Başlık ve Görev -->
         <h2 class="wonderland-font text-xl sm:text-2xl text-amber-400 mt-2 mb-1">
-            Beyaz Tavşan'ın Saat Kulesi
+            Beyaz Tavşan'ın Çizim Atölyesi
         </h2>
-        <p class="text-xs text-slate-400 mb-6 italic">
-            "Geç kaldım, geç kaldım! Çay saatine ne kadar kaldı?"
+        <p id="gorevBasligi" class="text-xs text-amber-200/90 mb-4 font-bold bg-amber-500/10 py-1.5 px-3 rounded-lg border border-amber-500/20">
+            🎯 Günün Görevi: Sihirli İskambil Kağıdı Çiz ve Boya!
         </p>
 
-        <!-- Sayaç Kutuları -->
-        <div class="grid grid-cols-4 gap-2 mb-6">
-            <div class="bg-slate-950/60 border border-amber-500/30 rounded-xl p-3">
-                <span id="days" class="wonderland-font text-2xl sm:text-3xl text-amber-300 font-bold">00</span>
-                <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Gün</span>
+        <!-- Sayaç Kutuları (Dakika / Saniye) -->
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-slate-950/80 border border-amber-500/40 rounded-2xl p-4 shadow-inner">
+                <span id="minutes" class="wonderland-font text-4xl sm:text-5xl text-amber-300 font-bold">15</span>
+                <span class="block text-[11px] text-slate-400 uppercase tracking-widest mt-1">Dakika</span>
             </div>
-            <div class="bg-slate-950/60 border border-amber-500/30 rounded-xl p-3">
-                <span id="hours" class="wonderland-font text-2xl sm:text-3xl text-amber-300 font-bold">00</span>
-                <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Saat</span>
-            </div>
-            <div class="bg-slate-950/60 border border-amber-500/30 rounded-xl p-3">
-                <span id="minutes" class="wonderland-font text-2xl sm:text-3xl text-amber-300 font-bold">00</span>
-                <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Dakika</span>
-            </div>
-            <div class="bg-slate-950/60 border border-amber-500/30 rounded-xl p-3">
-                <span id="seconds" class="wonderland-font text-2xl sm:text-3xl text-red-400 font-bold">00</span>
-                <span class="block text-[10px] text-slate-400 uppercase tracking-widest mt-1">Saniye</span>
+            <div class="bg-slate-950/80 border border-amber-500/40 rounded-2xl p-4 shadow-inner">
+                <span id="seconds" class="wonderland-font text-4xl sm:text-5xl text-red-400 font-bold">00</span>
+                <span class="block text-[11px] text-slate-400 uppercase tracking-widest mt-1">Saniye</span>
             </div>
         </div>
 
-        <!-- "Zaman Durdu!" Butonu (Interaktif Eğlence) -->
-        <button onclick="zamanDurdu()" class="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 text-white font-bold rounded-xl shadow-lg transition transform active:scale-95 text-sm sm:text-base wonderland-font tracking-wide">
-            🎩 Zamanı Durdur (Çay Saati!)
+        <!-- Kontrol Butonları -->
+        <div class="grid grid-cols-2 gap-2 mb-4">
+            <button onclick="goreviBaslat()" id="baslatBtn" class="py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg transition transform active:scale-95 text-sm wonderland-font">
+                ✨ Başlat
+            </button>
+            <button onclick="zamanDurdu()" id="durdurBtn" class="py-3 px-4 bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-500 hover:to-red-500 text-white font-bold rounded-xl shadow-lg transition transform active:scale-95 text-sm wonderland-font" disabled>
+                ⏳ Zamanı Durdur
+            </button>
+        </div>
+
+        <!-- Sıfırlama Butonu -->
+        <button onclick="sayaciSifirla()" class="w-full py-2 px-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs transition border border-slate-700">
+            🔄 Süreyi Başa Al
         </button>
 
         <!-- Tavşan'ın Mesaj Alanı -->
-        <p id="tavsanMesaji" class="text-xs text-amber-200/80 mt-4 min-h-[20px] transition-all">
-            "Acele et Menesse, çaylar soğuyor!"
+        <p id="tavsanMesaji" class="text-xs text-amber-300/80 mt-4 min-h-[24px] transition-all italic">
+            "Hazır olduğunda 'Başlat' tuşuna bas Menesse, saat işliyor!"
         </p>
     </div>
 
-    <!-- JavaScript ile Zamanı Yönetme -->
+    <!-- JavaScript ile Sayaç Mantığı -->
     <script>
-        // Çay saati hedef tarihini belirle (Örn: Gelecek Pazar veya belirleyeceğin bir saat)
-        // Burada örnek olması için bugünden 3 gün sonrasını seçiyoruz:
-        const hedefZaman = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
-        let sayacAktif = true;
+        let toplamSaniye = 15 * 60; // Başlangıç süresi: 15 dakika
+        let kalanSaniye = toplamSaniye;
+        let sayacInterval = null;
+        let aktifMi = false;
 
-        function sayaciGuncelle() {
-            if (!sayacAktif) return;
+        const dakikaEl = document.getElementById("minutes");
+        const saniyeEl = document.getElementById("seconds");
+        const mesajEl = document.getElementById("tavsanMesaji");
+        const baslatBtn = document.getElementById("baslatBtn");
+        const durdurBtn = document.getElementById("durdurBtn");
 
-            const simdi = new Date().getTime();
-            const kalan = hedefZaman - simdi;
-
-            if (kalan < 0) {
-                document.getElementById("tavsanMesaji").innerText = "🎉 Çay saati başladı! Şapkacı seni bekliyor!";
-                return;
-            }
-
-            const gun = Math.floor(kalan / (1000 * 60 * 60 * 24));
-            const saat = Math.floor((kalan % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const dakika = Math.floor((kalan % (1000 * 60 * 60)) / (1000 * 60));
-            const saniye = Math.floor((kalan % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = String(gun).padStart(2, '0');
-            document.getElementById("hours").innerText = String(saat).padStart(2, '0');
-            document.getElementById("minutes").innerText = String(dakika).padStart(2, '0');
-            document.getElementById("seconds").innerText = String(saniye).padStart(2, '0');
+        function ekraniGuncelle() {
+            const m = Math.floor(kalanSaniye / 60);
+            const s = kalanSaniye % 60;
+            dakikaEl.innerText = String(m).padStart(2, '0');
+            saniyeEl.innerText = String(s).padStart(2, '0');
         }
 
-        // Butona tıklandığında "Zaman Durdu!" konsepti
+        function goreviBaslat() {
+            if (aktifMi) return;
+            aktifMi = true;
+            baslatBtn.disabled = true;
+            baslatBtn.classList.add("opacity-50", "cursor-not-allowed");
+            durdurBtn.disabled = false;
+            durdurBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            
+            mesajEl.innerText = "🎨 Fırçanı kap! Harikalar Diyarı eskizi bekliyor...";
+            mesajEl.style.color = "#fde047";
+
+            sayacInterval = setInterval(() => {
+                if (kalanSaniye > 0) {
+                    kalanSaniye--;
+                    ekraniGuncelle();
+                } else {
+                    clearInterval(sayacInterval);
+                    aktifMi = false;
+                    mesajEl.innerText = "🎉 Süre bitti! Kraliçe resmini görmek için sabırsızlanıyor!";
+                    mesajEl.style.color = "#4ade80"; // Yeşil başarı rengi
+                    baslatBtn.disabled = false;
+                    baslatBtn.classList.remove("opacity-50", "cursor-not-allowed");
+                    durdurBtn.disabled = true;
+                    durdurBtn.classList.add("opacity-50", "cursor-not-allowed");
+                }
+            }, 1000);
+        }
+
         function zamanDurdu() {
-            sayacAktif = !sayacAktif;
-            const mesaj = document.getElementById("tavsanMesaji");
-            if (!sayacAktif) {
-                mesaj.innerText = "⏳ Harikalar Diyarı'nda zaman durdu! Şapkacı çay dolduruyor...";
-                mesaj.style.color = "#38bdf8"; // Mavi renk vurgusu
-            } else {
-                mesaj.innerText = "🏃‍♂️ Saatler tekrar çalışmaya başladı! Kaçıyoruz!";
-                mesaj.style.color = "#fde047";
-            }
+            if (!aktifMi) return;
+            clearInterval(sayacInterval);
+            aktifMi = false;
+            baslatBtn.disabled = false;
+            baslatBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            durdurBtn.disabled = true;
+            durdurBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+            mesajEl.innerText = "⏳ Zaman durdu! Çay molası zamanı...";
+            mesajEl.style.color = "#38bdf8"; // Mavi renk
         }
 
-        setInterval(sayaciGuncelle, 1000);
+        function sayaciSifirla() {
+            clearInterval(sayacInterval);
+            aktifMi = false;
+            kalanSaniye = toplamSaniye;
+            ekraniGuncelle();
+            baslatBtn.disabled = false;
+            baslatBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            durdurBtn.disabled = true;
+            durdurBtn.classList.add("opacity-50", "cursor-not-allowed");
+            mesajEl.innerText = "🔄 Süre sıfırlandı. Hazır olduğunda tekrar başlatabilirsin!";
+            mesajEl.style.color = "#fde047";
+        }
     </script>
 </body>
 </html>
